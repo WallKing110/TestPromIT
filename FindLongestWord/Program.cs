@@ -49,21 +49,8 @@ class Program
         else
             return false;
     }
-    static public void Main()
+    static string GetAnswer(string text)
     {
-        if (!CheckExistanceAndCreateFile())
-        {
-            return;
-        }
-
-        string text = ReadStringFromFile();
-
-        if (text.Length == 0)
-        {
-            Console.WriteLine("File is empty.");
-            return;
-        }
-
         string[] arr = text.Split(' ');
         string maxStr = "";
         for (int i = 0; i < arr.Length; ++i)
@@ -79,13 +66,32 @@ class Program
             }
         }
 
-        if (maxStr.Length == 0)
+        return maxStr;
+    }
+    static public void Main()
+    {
+        if (!CheckExistanceAndCreateFile())
+        {
+            return;
+        }
+
+        string text = ReadStringFromFile();
+
+        if (text.Length == 0)
+        {
+            Console.WriteLine("File is empty.");
+            return;
+        }
+
+        string answer = GetAnswer(text);
+
+        if (answer.Length == 0)
         {
             Console.WriteLine("Text doesn't have valid words.");
         }
         else
         {
-            Console.WriteLine(maxStr);
+            Console.WriteLine(answer);
         }
     }
 }
