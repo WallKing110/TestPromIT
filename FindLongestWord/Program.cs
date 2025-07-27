@@ -38,6 +38,17 @@ class Program
         string text = sb.ToString();
         return text;
     }
+    static private bool checkString(string s)
+    {
+        Func<char, bool> checkChar = c =>
+        {
+            return (!char.IsLetter(c) && !char.IsSymbol(' ')) || char.IsDigit(c);
+        };
+        if (s.Any(c => checkChar(c)))
+            return true;
+        else
+            return false;
+    }
     static public void Main()
     {
         if (!CheckExistanceAndCreateFile())
@@ -53,15 +64,11 @@ class Program
             return;
         }
 
-        Func<char, bool> checkChar = c =>
-        {
-            return (!char.IsLetter(c) && !char.IsSymbol(' ')) || char.IsDigit(c);
-        };
         string[] arr = text.Split(' ');
         string maxStr = "";
         for (int i = 0; i < arr.Length; ++i)
         {
-            if (arr[i].Any(c => checkChar(c)))
+            if (checkString(arr[i]))
             {
                 Console.WriteLine("String \"" + arr[i] + "\" contains unallowed character.");
                 continue;
