@@ -2,11 +2,12 @@
 
 class Program
 {
+    static private string filename = "text.txt";
     static public void Main()
     {
-        if (!File.Exists("text.txt"))
+        if (!File.Exists(filename))
         {
-            using (FileStream fs = new FileStream("text.txt", FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(filename, FileMode.OpenOrCreate))
             {
                 string fillText = "Fill this file with your line.";
                 byte[] fillBuffer = Encoding.Default.GetBytes(fillText);
@@ -17,7 +18,7 @@ class Program
             }
         }
 
-        FileStream fstream = new FileStream("text.txt", FileMode.Open, FileAccess.Read);
+        FileStream fstream = new FileStream(filename, FileMode.Open, FileAccess.Read);
         StringBuilder sb = new StringBuilder();
         byte[] buffer = new byte[1024];
         int bytesRead = 0;
