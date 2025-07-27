@@ -20,27 +20,32 @@ class Program
         }
         return true;
     }
-    static public void Main()
+    static string ReadStringFromFile()
     {
-        if (CheckExistanceAndCreateFile())
-        {
-            return;
-        }
-
         FileStream fstream = new FileStream(filename, FileMode.Open, FileAccess.Read);
         StringBuilder sb = new StringBuilder();
         byte[] buffer = new byte[1024];
         int bytesRead = 0;
-        using (StreamReader sr = new StreamReader(fstream, Encoding.Default))
+        using (StreamReader sr = new StreamReader(fstream, encoding))
         {
             while ((bytesRead = fstream.Read(buffer, 0, buffer.Length)) > 0)
             {
-                char[] chars = Encoding.Default.GetChars(buffer, 0, bytesRead);
+                char[] chars = encoding.GetChars(buffer, 0, bytesRead);
                 sb.Append(chars, 0, chars.Length);
             }
         }
         fstream.Close();
         string text = sb.ToString();
+        return text;
+    }
+    static public void Main()
+    {
+        if (!CheckExistanceAndCreateFile())
+        {
+            return;
+        }
+
+        string text = ReadStringFromFile();
 
         if (text.Length == 0)
         {
