@@ -36,6 +36,8 @@ class Library
 
     public List<Book> ListBooksByAuthor(string author)
     {
+        if (Globals.restrains(author))
+            throw new Exception("Author must be not empty, encountered: " + author);
         List<Book> result = new List<Book>();
         for (int i = 0; i < books.Count; i++)
         {
