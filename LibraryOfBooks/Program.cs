@@ -13,6 +13,8 @@ class Book
     readonly public int year;
     public Book(string s_title, string s_author, int i_year)
     {
+        if (Globals.restrains(s_title) || Globals.restrains(s_author) || i_year < 0 || i_year > DateTime.Now.Year)
+            throw new Exception("Title, author and year must be not be empty.");
         title = s_title;
         author = s_author;
         year = i_year;
@@ -52,7 +54,7 @@ class Program
     {
         Book a = new Book("Country of OZ", "Karabey", 1980);
         Book b = new Book("CounterString", "Tolstoy", 1282);
-        Book c = new Book("CounterStrike", "ToLsToY", 2025);
+        Book c = new Book("CounterStrike", "ToLsToY", 2026);
         Library lib = new Library();
         lib.AddBook(a);
         lib.AddBook(b);
