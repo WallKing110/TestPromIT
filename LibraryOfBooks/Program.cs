@@ -1,6 +1,11 @@
 ﻿namespace secondTask;
 
-
+public static class Globals
+{
+    public static Func<string?, bool> restrains = input => {
+        return string.IsNullOrWhiteSpace(input) || string.IsNullOrEmpty(input);
+    };
+}
 class Book
 {
     readonly public string title;
@@ -53,16 +58,12 @@ class Program
         lib.AddBook(b);
         lib.AddBook(c);
 
-        Func<string?, bool> restrains = input => {
-            return string.IsNullOrWhiteSpace(input) || string.IsNullOrEmpty(input);
-        };
-
     string? input = "";
-        while (restrains(input))
+        while (Globals.restrains(input))
         {
             Console.Write("Enter author of book:");
             input = Console.ReadLine();
-            if (restrains(input))
+            if (Globals.restrains(input))
             {
                 Console.Clear();
                 Console.WriteLine("Entered string is null or empty or contains only whitespaces.");
