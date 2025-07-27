@@ -3,7 +3,8 @@
 class Program
 {
     static private string filename = "text.txt";
-    static public void Main()
+    static private Encoding encoding = Encoding.Default;
+    static bool CheckExistanceAndCreateFile()
     {
         if (!File.Exists(filename))
         {
@@ -14,8 +15,16 @@ class Program
                 fs.Write(fillBuffer, 0, fillBuffer.Length);
                 Console.WriteLine("Required file didn't exist. We created 'text.txt' for program.");
                 fs.Close();
-                return;
+                return false;
             }
+        }
+        return true;
+    }
+    static public void Main()
+    {
+        if (CheckExistanceAndCreateFile())
+        {
+            return;
         }
 
         FileStream fstream = new FileStream(filename, FileMode.Open, FileAccess.Read);
