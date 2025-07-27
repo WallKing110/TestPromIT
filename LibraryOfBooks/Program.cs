@@ -56,7 +56,7 @@ class Program
     {
         Book a = new Book("Country of OZ", "Karabey", 1980);
         Book b = new Book("CounterString", "Tolstoy", 1282);
-        Book c = new Book("CounterStrike", "ToLsToY", 2026);
+        Book c = new Book("CounterStrike", "ToLsToY", 2025);
         Library lib = new Library();
         lib.AddBook(a);
         lib.AddBook(b);
